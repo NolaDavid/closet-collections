@@ -16,7 +16,7 @@ const Home = (): ReactElement => {
   // let _isMounted = false;
   const [mysteryImg, setMysteryImg] = React.useState('');
   const [topOutfit, setTopOutFit] = React.useState([]);
-  const [images, setImages] = React.useState([]);
+  const [images, setImages] = React.useState({});
   const [font, setFont] = useState(25);
   const [imgSize, setImgSize] = useState(25);
   const [fonth4, setFonth4] = useState(18);
@@ -66,11 +66,11 @@ const Home = (): ReactElement => {
   // });
 
 
-  React.useEffect(() => {
-    axios.get('/outfit')
-      .then(({ data }) => setImages(data))
-      .catch((err) => console.warn(err));
-  }, []);
+  // React.useEffect(() => {
+  //   axios.get('/outfit')
+  //     .then(({ data }) => setImages(data))
+  //     .catch((err) => console.warn(err));
+  // }, []);
 
 
   const larger = (): any => {
@@ -87,13 +87,9 @@ const Home = (): ReactElement => {
     setFonth4(18);
   };
 
-  const topRated = (): any => {
-    return images.sort((a, b) => b.likesCount - a.likesCount);
-  };
 
-  const random = (): any => {
-    Math.floor(Math.random() * images.length - 1);
-  };
+
+
 
 
   useEffect(() => {
@@ -108,7 +104,16 @@ const Home = (): ReactElement => {
   useEffect(() => {
 
     axios.get('/outfit')
-      .then(({ data }) => setImages(data))
+      .then(({ data }) => {
+        const info = data.reduce((acc, val) => {
+          if (acc.likesCount < val.likesCount) {
+            acc = val;
+          }
+          return acc;
+        });
+        console.log('dddd', info);
+        setImages(info);
+      })
       .catch((err) => console.warn(err));
 
   }, []);
@@ -135,7 +140,7 @@ const Home = (): ReactElement => {
   console.log('mystery', mysteryImg);
   return (
 
-    !images.length ? <h1>Loading</h1> :
+    !images ? <h1>Loading</h1> :
       <>
         <Grid container justify = "center" spacing={3}>
           {/* <h2 style={{fontSize: font}}>Currently {temp} and {desc}</h2> */}
@@ -145,11 +150,11 @@ const Home = (): ReactElement => {
             <ZoomOutIcon onClick={smaller} />
             <h1 style={{fontSize: fonth2}}>Top Rated Outfit </h1>
           </div>
-          <h4 style={{fontSize: fonth4, paddingBottom: 0}}> {`This outfit has ${images.sort((a, b) => b.likesCount - a.likesCount)[0].likesCount} likes` }</h4>
+          <h4 style={{fontSize: fonth4, paddingBottom: 0}}> {`This outfit has ${images['likesCount']} likes` }</h4>
 
           <Box border={1} width="75%" boxShadow={2} display="block" height="65%">
             <img className="photo" alt="outfit" src={
-              images.sort((a, b) => b.likesCount - a.likesCount)[0].imageUrl}/>
+              images['imageUrl']}/>
 
             {console.log('images', images)}
           </Box>

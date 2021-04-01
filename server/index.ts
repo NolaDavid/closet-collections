@@ -31,7 +31,10 @@ dotenv.config({
 
 
 const io = new Server(httpServer, {
-  // ...
+  cors: {
+    origin: 'https://closet-collections-308301.uc.r.appspot.com/',
+    methods: ['GET', 'POST']
+  }
 });
 
 

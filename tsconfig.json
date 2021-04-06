@@ -1,10 +1,45 @@
 {
+  // "compilerOptions": {
+  //   "outDir": "./client/dist/bundle.ts",
+  //   "noImplicitAny": false,
+  //   "allowSyntheticDefaultImports": true,
+  //   "module": "commonjs",
+  //   "target": "es6",
+  //   "experimentalDecorators": true,
+  //   "emitDecoratorMetadata": true,
+  //   "jsx": "react",
+  //   "lib": ["es6", "DOM"],
+  //   "allowJs": true,
+  //   "moduleResolution": "node"
+  // },
   "compilerOptions": {
-    "outDir": "./client/dist",
-    "noImplicitAny": true,
-    "module": "es6",
-    "target": "es5",
+    "experimentalDecorators": true,
     "jsx": "react",
-    "allowJs": true
-  }
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "outDir": "./client/dist/bundle.ts",
+    "module": "commonjs",
+    "target": "es5",
+    "lib": ["es6", "dom"],
+    "sourceMap": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+
+  },
+    "noImplicitAny": true,
+    "exclude": [
+      "node_modules",
+      "jest.config.js",
+      "babel.config.js"
+    ],
+    "target": "esnext",
+       "baseUrl": ".",
+       "paths": {
+         "*": ["src/*"],
+         "tests": ["tests/*"],
+         "@components/*": ["src/components/*"],
+       }
+
 }

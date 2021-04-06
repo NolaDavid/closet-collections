@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>CC</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+  <title>Closet Collections</title>
+  <link rel="shortcut icon" type="image/jpg" href="https://i.ibb.co/8Yhc3sj/favicon-CC.png"/>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+  </style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <body>
+
+
   <div id='root'>
   </div>
   <script src='bundle.js'></script>
+  <script src="/socket.io/socket.io.js"></script>
+<script>
+   var socket = io();
+</script>
 </body>
 </html>
